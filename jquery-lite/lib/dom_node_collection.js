@@ -86,7 +86,25 @@ class DOMNodeCollection {
     });
   }
 
+  on(type, listener) {
+    this.$els.forEach(el => {
+      el.addEventListener(type, listener);
+      let funkyName = `event-${type}`;
+      if (el[funkyName] === undefined) {
+        el[funkyName] = [];
+      }
+      el[funkyName].push(listener);
+    });
+  }
 
+  off(type) {
+    this.$els.forEach(el => {
+
+      el[`event-${type}`].forEach((callback) => {
+        el.removeEventListener(type, callback);
+      });
+    });
+  }
 }
 
 module.exports = DOMNodeCollection;
