@@ -1,6 +1,7 @@
 class DOMNodeCollection {
   constructor(array) {
     this.$els = array;
+
   }
 
   html(string) {
